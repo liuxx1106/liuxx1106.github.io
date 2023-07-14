@@ -16,25 +16,25 @@
   <meta name="author" content="巨鹿">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题目要求leetcode地址  剑指 Offer II 001. 整数除法 简单 253 给定两个整数 a 和 b ，求它们的除法的商 a&#x2F;b ，要求不得使用乘号 ‘*’、除号 ‘&#x2F;‘ 以及求余符号 ‘%’ 。  注意 整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) &#x3D; 8 以及 truncate(-2.7335) &amp;#x3">
+    <meta name="description" content="题目要求leetcode地址给定一个正整数数组 nums和整数 k ，请找出该数组内乘积小于 k 的连续的子数组的个数。 示例1 输入: nums &#x3D; [10,5,2,6], k &#x3D; 100输出: 8解释: 8 个乘积小于 100 的子数组分别为: [10], [5], [2], [6], [10,5], [5,2], [2,6], [5,2,6]。需要注意的是 [10,5,2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指 Offer II 001. 整数除法">
-<meta property="og:url" content="https://liuxx1106.github.io/2023/07/13/algorithm-offer1/index.html">
+<meta property="og:title" content="剑指 Offer II 009. 乘积小于 K 的连续子数组的个数">
+<meta property="og:url" content="https://liuxx1106.github.io/2023/07/14/algorithm-offer5/index.html">
 <meta property="og:site_name" content="巨鹿Coding">
-<meta property="og:description" content="题目要求leetcode地址  剑指 Offer II 001. 整数除法 简单 253 给定两个整数 a 和 b ，求它们的除法的商 a&#x2F;b ，要求不得使用乘号 ‘*’、除号 ‘&#x2F;‘ 以及求余符号 ‘%’ 。  注意 整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) &#x3D; 8 以及 truncate(-2.7335) &amp;#x3">
+<meta property="og:description" content="题目要求leetcode地址给定一个正整数数组 nums和整数 k ，请找出该数组内乘积小于 k 的连续的子数组的个数。 示例1 输入: nums &#x3D; [10,5,2,6], k &#x3D; 100输出: 8解释: 8 个乘积小于 100 的子数组分别为: [10], [5], [2], [6], [10,5], [5,2], [2,6], [5,2,6]。需要注意的是 [10,5,2">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://liuxx1106.github.io/img/index_img/algorithm1.jpg">
-<meta property="article:published_time" content="2023-07-13T09:04:33.910Z">
-<meta property="article:modified_time" content="2023-07-14T06:48:45.653Z">
+<meta property="og:image" content="https://liuxx1106.github.io/img/index_img/algorithm5.jpg">
+<meta property="article:published_time" content="2023-07-14T06:32:51.155Z">
+<meta property="article:modified_time" content="2023-07-14T06:50:10.366Z">
 <meta property="article:author" content="巨鹿">
 <meta property="article:tag" content="LeetCode">
-<meta property="article:tag" content="整数除法">
+<meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://liuxx1106.github.io/img/index_img/algorithm1.jpg">
+<meta name="twitter:image" content="https://liuxx1106.github.io/img/index_img/algorithm5.jpg">
   
   
   
-  <title>剑指 Offer II 001. 整数除法 - 巨鹿Coding</title>
+  <title>剑指 Offer II 009. 乘积小于 K 的连续子数组的个数 - 巨鹿Coding</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="剑指 Offer II 001. 整数除法"></span>
+            <span id="subtitle" data-typed-text="剑指 Offer II 009. 乘积小于 K 的连续子数组的个数"></span>
           
         </div>
 
@@ -240,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-13 17:04" pubdate>
-          2023年7月13日 下午
+        <time datetime="2023-07-14 14:32" pubdate>
+          2023年7月14日 下午
         </time>
       </span>
     
@@ -252,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.1k 字
         
       </span>
     
@@ -263,7 +263,7 @@
         
         
         
-          21 分钟
+          18 分钟
         
       </span>
     
@@ -308,35 +308,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">剑指 Offer II 001. 整数除法</h1>
+            <h1 id="seo-header">剑指 Offer II 009. 乘积小于 K 的连续子数组的个数</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/xoh6Oh/?envType=study-plan-v2&id=coding-interviews-special">leetcode地址</a></p>
-<ul>
-<li>剑指 Offer II 001. 整数除法</li>
-<li>简单</li>
-<li>253</li>
-<li>给定两个整数 a 和 b ，求它们的除法的商 a&#x2F;b ，要求不得使用乘号 ‘*’、除号 ‘&#x2F;‘ 以及求余符号 ‘%’ 。</li>
-</ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) &#x3D; 8 以及 truncate(-2.7335) &#x3D; -2</li>
-<li>假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−2 ^ 31，2 ^ 31 -1 ]。本题中，如果除法结果溢出，则返回 2^31 − 1</li>
-</ul>
-<blockquote>
-<p>示例 1：<br>  输入：a &#x3D; 15, b &#x3D; 2<br>  输出：7<br>  解释：15&#x2F;2 &#x3D; truncate(7.5) &#x3D; 7<br>  示例 2：<br>  输入：a &#x3D; 7, b &#x3D; -3<br>  输出：-2<br>  解释：7&#x2F;-3 &#x3D; truncate(-2.33333..) &#x3D; -2<br>  示例 3：<br>  输入：a &#x3D; 0, b &#x3D; 1<br>  输出：0<br>  示例 4：<br>  输入：a &#x3D; 1, b &#x3D; 1<br>  输出：1</p>
+                <h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ZVAVXX/?envType=study-plan-v2&envId=coding-interviews-special">leetcode地址</a><br>给定一个正整数数组 nums和整数 k ，请找出该数组内乘积小于 k 的连续的子数组的个数。</p>
+<h4 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h4><blockquote>
+<p>输入: nums &#x3D; [10,5,2,6], k &#x3D; 100<br>输出: 8<br>解释: 8 个乘积小于 100 的子数组分别为: [10], [5], [2], [6], [10,5], [5,2], [2,6], [5,2,6]。<br>需要注意的是 [10,5,2] 并不是乘积小于100的子数组。</p>
 </blockquote>
-<ul>
-<li>提示:</li>
-<li>-2 ^ 31 &lt;&#x3D; a, b &lt;&#x3D; 2 ^ 31 - 1</li>
-<li>b !&#x3D; 0<br> *&#x2F;</li>
+<h4 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h4><blockquote>
+<p>输入: nums &#x3D; [1,2,3], k &#x3D; 0<br>输出: 0</p>
+</blockquote>
+<h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><p>1 &lt;&#x3D; nums.length &lt;&#x3D; 3 * 10 ^ 4<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 1000<br>0 &lt;&#x3D; k &lt;&#x3D; 10 ^ 6</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<li><ol>
+<li>双指针遍历。定义左右指针left和right, right向右扫描，找到以left为起点的符合条件的子数组；当不符合条件时left右移，同时重置right，重复之前的操作；</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>我们遍历整个数组 nums，定义两个指针 left 和 right，表示子数组的左右端点，用 res 变量保存符合条件的连续子数组的个数，并且定义 product 变量，表示当前子数组的乘积。<br>遍历数组中的每一个数，把当前数的值累乘到 product 中，如果 product 大于等于设定的值 k，向左移动左指针 left 并把左端元素除以 product 的值，直到当前区间内所有数的乘积都小于 k 为止。此时，减去左右端点之间的数的个数加一（因为是左开右闭区间），得到符合条件的区间的个数。<br>最后返回 res 变量的值，即为符合条件的连续子数组的个数。</li>
+</ol>
+</li>
 </ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目要求只能使用加减法，那我们自然想到用减法实现除法，用“被减数”能减去几次“减数”来衡量最后的结果，这时候我们想到求x的幂次的快速解法，将x成倍成倍的求幂，这里将减数成倍成倍的增大，次数对应也是成倍成倍的增大，例如：取a&#x3D;23，b&#x3D;2，b的变化如下:2-&gt;4-&gt;8-&gt;16,次数count的变化如下1-&gt;2-&gt;4-&gt;8,最后a-b&#x3D;23-16&#x3D;7，对7再执行一次上述过程，b:2-&gt;4,count:1-&gt;2,a-b&#x3D;3, 然后对3再执行一次，b:2,count:1,a-b&#x3D;1，1已经小于原b&#x3D;2，可以结束了，最后计数一下每轮的count是多少8+2+1&#x3D;11。</p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>为方便运算，我们需要将a，b都转为同正or同负，由于INT_MIN转正就越界了，我们只好都转负，这也是都转负的原因，有一种特殊情况 INT_MIN&#x2F;(-1)就overflow了 所以直接特殊处理最终结果的正负。</p>
-<h2 id="代码实现（java）"><a href="#代码实现（java）" class="headerlink" title="代码实现（java）"></a>代码实现（java）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">divide</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-comment">//特殊情况直接处理</span><br>        <span class="hljs-keyword">if</span> (a == Integer.MIN_VALUE &amp;&amp; b == -<span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> Integer.MAX_VALUE;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (b == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> a;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; <span class="hljs-comment">// 记录a,b取反标志，如只有一个取反，则最终结果也要取反</span><br>        <span class="hljs-keyword">if</span> (a &gt; <span class="hljs-number">0</span>) &#123;<br>            flag--;<br>            a = -a;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (b &gt; <span class="hljs-number">0</span>) &#123;<br>            flag--;<br>            b = -b;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> calc(a, b);<br>        <span class="hljs-keyword">return</span> flag == <span class="hljs-number">1</span> ? -res : res;<br><br>    &#125;<br><br>    <span class="hljs-comment">// 求a能减去b的次数</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">calc</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (a &lt;= b) &#123; <span class="hljs-comment">// a,b为负数</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> b; <span class="hljs-comment">// 临时变量</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; <span class="hljs-comment">// 记录a被减的次数，因为a&gt;b,所以a一定可以被b减一次</span><br>            <span class="hljs-keyword">while</span> (temp &gt;= Integer.MIN_VALUE &gt;&gt; <span class="hljs-number">1</span> &amp;&amp; a &lt;= temp &lt;&lt; <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// temp应该大于等于最小值的二分之一，否则会导致溢出。a的绝对值应该比temp*2还小</span><br>                count += count; <span class="hljs-comment">// 可以减的次数翻倍</span><br>                temp += temp; <span class="hljs-comment">// 减数也翻倍</span><br>            &#125;<br>            res += count; <span class="hljs-comment">// 可以减的次数累加即为结果</span><br>            a -= temp; <span class="hljs-comment">// a减去当前temp，重新去和b求最大可以减的次数</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码实现（java）"><a href="#代码实现（java）" class="headerlink" title="代码实现（java）"></a>代码实现（java）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br> 方法<span class="hljs-number">1.</span> 双指针<br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSubarrayProductLessThanK</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// 记录个数</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; <span class="hljs-comment">//左边界</span><br>        <span class="hljs-keyword">while</span>(left&lt; nums.length) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; <span class="hljs-comment">// 乘积</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> left; <span class="hljs-comment">// 每次重置右边界</span><br>            <span class="hljs-keyword">while</span>(right &lt; nums.length) &#123;<br>                sum *= nums[right]; <span class="hljs-comment">// 累乘判断是否小于K</span><br>                <span class="hljs-keyword">if</span>(sum &lt; k) &#123;<br>                    count++;<br>                    right++;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>            left++; <span class="hljs-comment">// 左边界前进一位</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>     &#125;<br><br> 方法<span class="hljs-number">2.</span> 滑动窗口<br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSubarrayProductLessThanK</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>    <span class="hljs-keyword">if</span> (k &lt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">product</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (right &lt; nums.length) &#123;<br>            product *= nums[right];<br>            <span class="hljs-keyword">while</span> (left &lt;= right &amp;&amp; product &gt;= k) &#123;<br>                product /= nums[left++];<br>            &#125;<br>            <span class="hljs-comment">//</span><br>            res += (right - left + <span class="hljs-number">1</span>);<br>            right++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="代码实现（golang）"><a href="#代码实现（golang）" class="headerlink" title="代码实现（golang）"></a>代码实现（golang）</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">divide</span><span class="hljs-params">(a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-comment">//特殊情况直接处理</span><br>    <span class="hljs-keyword">if</span> a == math.MinInt32 &amp;&amp; b == <span class="hljs-number">-1</span> &#123;<br>        <span class="hljs-keyword">return</span> math.MaxInt32<br>    &#125;<br>    <span class="hljs-keyword">if</span> b == <span class="hljs-number">1</span> &#123;<br>        <span class="hljs-keyword">return</span> a<br>    &#125;<br>    flag := <span class="hljs-number">2</span> <span class="hljs-comment">// 记录a,b取反标志，如只有一个取反，则最终结果也要取反</span><br>    <span class="hljs-keyword">if</span> a &gt; <span class="hljs-number">0</span> &#123;<br>        flag--<br>        a = -a<br>    &#125;<br>    <span class="hljs-keyword">if</span> b &gt; <span class="hljs-number">0</span> &#123;<br>        flag--<br>        b = -b<br>    &#125;<br>    res := calc(a, b)<br>    <span class="hljs-keyword">if</span> flag == <span class="hljs-number">1</span> &#123;<br>        <span class="hljs-keyword">return</span> -res<br>    &#125;<br>    <span class="hljs-keyword">return</span> res<br>&#125;<br><br><span class="hljs-comment">// 求a能减去b的次数</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">calc</span><span class="hljs-params">(a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    res := <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> a &lt;= b &#123; <span class="hljs-comment">// a,b为负数</span><br>        temp := b <span class="hljs-comment">// 临时变量</span><br>        count := <span class="hljs-number">1</span> <span class="hljs-comment">// 记录a被减的次数，因为a&gt;b,所以a一定可以被b减一次</span><br>        <span class="hljs-keyword">for</span> temp &gt;= math.MinInt32/<span class="hljs-number">2</span> &amp;&amp; a &lt;= temp&lt;&lt;<span class="hljs-number">1</span> &#123; <span class="hljs-comment">// temp应该大于等于最小值的二分之一，否则会导致溢出。a的绝对值应该比temp*2还小</span><br>            count += count <span class="hljs-comment">// 可以减的次数翻倍</span><br>            temp += temp <span class="hljs-comment">// 减数也翻倍</span><br>        &#125;<br>        res += count <span class="hljs-comment">// 可以减的次数累加即为结果</span><br>        a -= temp <span class="hljs-comment">// a减去当前temp，重新去和b求最大可以减的次数</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> res<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码实现（golang）"><a href="#代码实现（golang）" class="headerlink" title="代码实现（golang）"></a>代码实现（golang）</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//1.map解法</span><br>方法<span class="hljs-number">1.</span> 双指针<br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">numSubarrayProductLessThanK</span><span class="hljs-params">(nums []<span class="hljs-type">int</span>, k <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    count := <span class="hljs-number">0</span> <span class="hljs-comment">// 记录个数</span><br>    left := <span class="hljs-number">0</span>  <span class="hljs-comment">// 左边界</span><br>    <span class="hljs-keyword">for</span> left &lt; <span class="hljs-built_in">len</span>(nums) &#123;<br>        sum := <span class="hljs-number">1</span>     <span class="hljs-comment">// 乘积</span><br>        right := left <span class="hljs-comment">// 每次重置右边界</span><br>        <span class="hljs-keyword">for</span> right &lt; <span class="hljs-built_in">len</span>(nums) &#123;<br>            sum *= nums[right] <span class="hljs-comment">// 累乘判断是否小于K</span><br>            <span class="hljs-keyword">if</span> sum &lt; k &#123;<br>                count++<br>                right++<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">break</span><br>            &#125;<br>        &#125;<br>        left++ <span class="hljs-comment">// 左边界前进一位</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> count<br>&#125;<br><br> 方法<span class="hljs-number">2.</span> 滑动窗口<br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">numSubarrayProductLessThanK</span><span class="hljs-params">(nums []<span class="hljs-type">int</span>, k <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>    <span class="hljs-keyword">if</span> k &lt;= <span class="hljs-number">1</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>    &#125;<br>    left, right, res, product := <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span><br><br>    <span class="hljs-keyword">for</span> right &lt; <span class="hljs-built_in">len</span>(nums) &#123;<br>        product *= nums[right]<br>        <span class="hljs-keyword">for</span> left &lt;= right &amp;&amp; product &gt;= k &#123;<br>            product /= nums[left]<br>            left++<br>        &#125;<br>        res += (right - left + <span class="hljs-number">1</span>)<br>        right++<br>    &#125;<br>     <br>    <span class="hljs-keyword">return</span> res<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -372,7 +369,7 @@
       
         <a href="/tags/LeetCode/" class="print-no-link">#LeetCode</a>
       
-        <a href="/tags/%E6%95%B4%E6%95%B0%E9%99%A4%E6%B3%95/" class="print-no-link">#整数除法</a>
+        <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" class="print-no-link">#双指针</a>
       
     </div>
   
@@ -384,8 +381,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>剑指 Offer II 001. 整数除法</div>
-      <div>https://liuxx1106.github.io/2023/07/13/algorithm-offer1/</div>
+      <div>剑指 Offer II 009. 乘积小于 K 的连续子数组的个数</div>
+      <div>https://liuxx1106.github.io/2023/07/14/algorithm-offer5/</div>
     </div>
     <div class="license-meta">
       
@@ -397,7 +394,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月13日</div>
+          <div>2023年7月14日</div>
         </div>
       
       
@@ -429,9 +426,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/14/algorithm-offer2/" title="剑指 Offer II 002. 二进制加法">
+                      <a href="/2023/07/14/springboot-bigdata-export/" title="SpringBoot 实现 MySQL 百万级数据量导出并避免 OOM 的解决方案">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">剑指 Offer II 002. 二进制加法</span>
+                        <span class="hidden-mobile">SpringBoot 实现 MySQL 百万级数据量导出并避免 OOM 的解决方案</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -439,8 +436,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/13/hello-world/" title="My First Blog">
-                        <span class="hidden-mobile">My First Blog</span>
+                      <a href="/2023/07/14/algorithm-offer4/" title="剑指 Offer II 006. 排序数组中两个数字之和">
+                        <span class="hidden-mobile">剑指 Offer II 006. 排序数组中两个数字之和</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
