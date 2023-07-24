@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>剑指 Offer II 046. 二叉树的右侧视图</title>
+    <link href="/2023/07/24/algorithm-offer6/"/>
+    <url>/2023/07/24/algorithm-offer6/</url>
+    
+    <content type="html"><![CDATA[<h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p><a href="https://leetcode.cn/problems/WNC0Lk/description/?envType=study-plan-v2&envId=coding-interviews-special">leetcode地址</a><br>给定一个二叉树的 根节点 root，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。</p><h4 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h4><p><img src="/../img/content_img/offer6-1.png" alt="示例1"></p><blockquote><p>输入: [1,2,3,null,5,null,4]<br>输出: [1,3,4]</p></blockquote><h4 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h4><blockquote><p>输入: [1,null,3]<br>输出: [1,3]</p></blockquote><h4 id="示例3"><a href="#示例3" class="headerlink" title="示例3"></a>示例3</h4><blockquote><p>输入: []<br>输出: []</p></blockquote><h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><ul><li>二叉树的节点个数的范围是 [0,100]</li><li>-100 &lt;&#x3D; Node.val &lt;&#x3D; 100</li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul><li><code>DFS</code>深度优先搜索，看到该题目，我们的首先想到的应该是dfs, 步骤：<ul><li>从根节点一直沿着右侧节点遍历，最右侧节点全部为待返回的值，直接加入结果即可，记录层高deep；</li><li>遍历左边节点，如果curDeep &gt; deep,且node.right有值，则为右侧元素加入结果；</li><li>递归；</li></ul></li><li><code>BFS</code>没电了，待补充, 步骤：<ul><li>；</li><li>；</li><li>；</li></ul></li></ul><h2 id="代码实现（java）"><a href="#代码实现（java）" class="headerlink" title="代码实现（java）"></a>代码实现（java）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    <span class="hljs-type">int</span> deep;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">rightSideView</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        deep = -<span class="hljs-number">1</span>;<br>        dfs(root,<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> res;<br><br>    &#125;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(TreeNode node, <span class="hljs-type">int</span> curDeep)</span> &#123;<br>        <span class="hljs-keyword">if</span>(node == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(curDeep &gt; deep) &#123;<br>            deep = curDeep;<br>            res.add(node.val);<br>        &#125;<br>        dfs(node.right,curDeep + <span class="hljs-number">1</span>);<br>        dfs(node.left, curDeep + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="代码实现（golang）"><a href="#代码实现（golang）" class="headerlink" title="代码实现（golang）"></a>代码实现（golang）</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指 Offer II</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>LeetCode</tag>
+      
+      <tag>二叉树</tag>
+      
+      <tag>深度优先搜索</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Redis相关知识</title>
     <link href="/2023/07/18/redis/"/>
     <url>/2023/07/18/redis/</url>
