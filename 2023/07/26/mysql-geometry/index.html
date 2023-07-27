@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://liuxx1106.github.io/img/index_img/mysql-geometry.jpg">
 <meta property="article:published_time" content="2023-07-26T14:56:55.584Z">
-<meta property="article:modified_time" content="2023-07-26T16:08:45.971Z">
+<meta property="article:modified_time" content="2023-07-27T02:35:07.138Z">
 <meta property="article:author" content="巨鹿">
 <meta property="article:tag" content="mybatisplus">
 <meta property="article:tag" content="mysql">
@@ -253,7 +253,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.1k 字
+          9.4k 字
         
       </span>
     
@@ -264,7 +264,7 @@
         
         
         
-          51 分钟
+          79 分钟
         
       </span>
     
@@ -315,8 +315,8 @@
               <div class="markdown-body">
                 
                 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近接手同事做了一半的项目，其中有个需求是元数据入库需要存储空间数据，支持空间查询。<br>当前项目后台使用的是<code>SpringBoot</code> + <code>MyBatisPlus</code> + <code>MySQL</code>, 前端使用的是vue2。<br>由于之前做空间数据都是使用的<code>PostgreSql</code>, 它有着强大空间数据处理能力，且项目中使用也很方便。<br>潜意识里认为<code>MySQL</code>不支持空间数据，没想到一查资料居然是支持的，于是开始了连续几个小时的踩坑，终于搞定，整理成完成路线供大家参考。</p>
-<h3 id="1-MySQL空间数据"><a href="#1-MySQL空间数据" class="headerlink" title="1. MySQL空间数据"></a>1. MySQL空间数据</h3><p>MySQL为空间数据存储及处理提供了专用的类型geometry(支持所有的空间结构)，还有有细分类型Point, LineString, Polygon,MultiPoint,MultiLineString,MultiPolygon等等，同时提供了大量的空间函数支持空间运算和查询。</p>
-<h3 id="2-GeoJson介绍"><a href="#2-GeoJson介绍" class="headerlink" title="2. GeoJson介绍"></a>2. GeoJson介绍</h3><p>GeoJSON是一种对各种地理数据结构进行编码的格式。GeoJSON对象可以表示几何、特征或者特征集合。GeoJSON支持下面几何类型：点、线、面、多点、多线、多面和几何集合。GeoJSON里的特征包含一个几何对象和其他属性，特征集合表示一系列特征。一个完整的GeoJSON数据结构总是一个（JSON术语里的）对象。以下为常见示例：</p>
+<h3 id="1-MySQL空间数据"><a href="#1-MySQL空间数据" class="headerlink" title="1. MySQL空间数据"></a>1. MySQL空间数据</h3><p>MySQL为空间数据存储及处理提供了专用的类型geometry(支持所有的空间结构)，还有有细分类型Point, LineString, Polygon,MultiPoint,<br>MultiLineString,MultiPolygon等等，同时提供了大量的空间函数支持空间运算和查询。</p>
+<h3 id="2-GeoJson介绍"><a href="#2-GeoJson介绍" class="headerlink" title="2. GeoJson介绍"></a>2. GeoJson介绍</h3><p>GeoJSON是一种对各种地理数据结构进行编码的格式。GeoJSON对象可以表示几何、特征或者特征集合。GeoJSON支持下面几何类型：点、线、面、多点、多线、<br>多面和几何集合。GeoJSON里的特征包含一个几何对象和其他属性，特征集合表示一系列特征。一个完整的GeoJSON数据结构总是一个（JSON术语里的）对象。<br>以下为常见示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java">&#123;<br>    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;FeatureCollection&quot;</span>,<br>    <span class="hljs-string">&quot;features&quot;</span>: [&#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Feature&quot;</span>,<br>            <span class="hljs-string">&quot;geometry&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Point&quot;</span>,<br>                <span class="hljs-string">&quot;coordinates&quot;</span>: [<span class="hljs-number">102.0</span>, <span class="hljs-number">0.5</span>]<br>            &#125;,<br>            <span class="hljs-string">&quot;properties&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;prop0&quot;</span>: <span class="hljs-string">&quot;value0&quot;</span><br>            &#125;<br>        &#125;, &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Feature&quot;</span>,<br>            <span class="hljs-string">&quot;geometry&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;LineString&quot;</span>,<br>                <span class="hljs-string">&quot;coordinates&quot;</span>: [[<span class="hljs-number">102.0</span>, <span class="hljs-number">0.0</span>], [<span class="hljs-number">103.0</span>, <span class="hljs-number">1.0</span>], [<span class="hljs-number">104.0</span>, <span class="hljs-number">0.0</span>], [<span class="hljs-number">105.0</span>, <span class="hljs-number">1.0</span>]]<br>            &#125;,<br>            <span class="hljs-string">&quot;properties&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;prop0&quot;</span>: <span class="hljs-string">&quot;value0&quot;</span>,<br>                <span class="hljs-string">&quot;prop1&quot;</span>: <span class="hljs-number">0.0</span><br>            &#125;<br>        &#125;, &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Feature&quot;</span>,<br>            <span class="hljs-string">&quot;geometry&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Polygon&quot;</span>,<br>                <span class="hljs-string">&quot;coordinates&quot;</span>: [[<span class="hljs-number">100.0</span>, <span class="hljs-number">0.0</span>], [<span class="hljs-number">101.0</span>, <span class="hljs-number">0.0</span>], [<span class="hljs-number">101.0</span>, <span class="hljs-number">1.0</span>], [<span class="hljs-number">100.0</span>, <span class="hljs-number">1.0</span>], [<span class="hljs-number">100.0</span>, <span class="hljs-number">0.0</span>]]<br>            &#125;,<br>            <span class="hljs-string">&quot;properties&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;prop0&quot;</span>: <span class="hljs-string">&quot;value0&quot;</span>,<br>                <span class="hljs-string">&quot;prop1&quot;</span>: &#123;<br>                    <span class="hljs-string">&quot;this&quot;</span>: <span class="hljs-string">&quot;that&quot;</span><br>                &#125;<br>            &#125;<br>        &#125;<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h3 id="3-MySql格式化空间数据类型（geometry相互转换geojson）"><a href="#3-MySql格式化空间数据类型（geometry相互转换geojson）" class="headerlink" title="3.MySql格式化空间数据类型（geometry相互转换geojson）"></a>3.MySql格式化空间数据类型（geometry相互转换geojson）</h3><p>MySQL提供了几个空间函数用来解析及格式化空间数据，geojson是gis空间数据展示的标准格式，前端地图框架及后端空间分析相关框架都会支持geojson格式。</p>
@@ -364,9 +364,107 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@TableName(value = &quot;f_metadata&quot;,autoResultMap = true)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Metadata</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JeecgEntity</span> &#123;<br>    <span class="hljs-comment">//省略</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>由于能查到的资料很有限，这里卡了半天，中间还尝试了方言 + geojson格式转换注解方式,失败了<br>database-platform: org.hibernatespatial.mysql.MySQLSpatialDialect<br>@JsonSerialize(using &#x3D; GeometrySerializer.class)<br>@JsonDeserialize(using &#x3D; GeometryDeserializer.class)<br>此方法在postgresql中可用</p>
+<p>由于能查到的资料很有限，这里卡了半天，中间还尝试了MySQL方言 + Geometry格式化注解的方式,失败了<br>database-platform: org.hibernatespatial.mysql.MySQLSpatialDialect<br>@JsonSerialize(using &#x3D; GeometrySerializer.class)<br>@JsonDeserialize(using &#x3D; GeometryDeserializer.class)<br>此方法在postgresql中可用</p>
 </blockquote>
-<p>… 未完待续</p>
+<p>至此，我们的后台服务已经可以支持基本的增加、分页查询操作，空间数据可以完成自动转换。</p>
+<h4 id="4-3-MyBatisPlus的QueryWrapper构造空间查询"><a href="#4-3-MyBatisPlus的QueryWrapper构造空间查询" class="headerlink" title="4.3 MyBatisPlus的QueryWrapper构造空间查询"></a>4.3 MyBatisPlus的QueryWrapper构造空间查询</h4><p>我们在项目开发中除了基本的分页查询，还要用到区域检索，而前面提到MySQL提供了大量的空间函数去支持空间查询。<br>比如：</p>
+<ul>
+<li>MBRContains(A,B) –&gt; A包含B</li>
+<li>MBRWithin(A,B) –&gt; A在B中</li>
+</ul>
+<p><em>文末附MySQL空间处理函数和方法</em></p>
+<p>所以，我们可以利用相关函数去做区域查询，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">select * from f_metadata where <span class="hljs-title function_">MBRContains</span><span class="hljs-params">(ST_GeomFromText(<span class="hljs-string">&#x27;Polygon((89.76 41.31,125.36 44.56,117.07 23.29,92.33 23.39,89.76 41.31))&#x27;</span>)</span>,geom_point)<br></code></pre></td></tr></table></figure>
+
+<p>该sql语句可以检索到geom_point在此闭合区域内的所有数据。</p>
+<p>现在我们需要考虑下QueryWrapper有没有MBRContains方法，查了下果然没有，那么怎么用QueryWrapper来构造空间查询呢？</p>
+<blockquote>
+<p>通过查看QueryWrapper的所有内部方法，我发现了exist函数：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">default</span> Children <span class="hljs-title function_">exists</span><span class="hljs-params">(String existsSql)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.exists(<span class="hljs-literal">true</span>, existsSql);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>它可以传入原生sql语句，然后先执行外层查询，再用结果去匹配是否存在于exists内，如果为true，则作为结果返回。<br>先在数据库写了下，没问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">select * from f_metadata where <span class="hljs-title function_">EXISTS</span><span class="hljs-params">(select* from (select * from f_metadata where Contains(ST_GeomFromText(<span class="hljs-string">&#x27;Polygon((89.76 41.31,125.36 44.56,117.07 23.29,92.33 23.39,89.76 41.31))&#x27;</span>)</span>,geom_point)) as b where f_metadata.id = b.id  );<br></code></pre></td></tr></table></figure>
+
+<p>后台代码中的QueryWrapper构造：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// ......</span><br><span class="hljs-keyword">if</span> (ObjectUtil.isNotEmpty(metadata.getGeomPoint())) &#123;<br>        queryWrapper.exists(<span class="hljs-string">&quot;select * from (select * from f_metadata where Contains(ST_GeomFromText(&#x27;&quot;</span> + metadata.getGeomPoint() + <span class="hljs-string">&quot;&#x27;),geom_point)) as b where f_metadata.id = b.id&quot;</span>);<br>&#125;<br>queryWrapper.lambda().between(ObjectUtil.isNotEmpty(metadata.getStartTime()) &amp;&amp; ObjectUtil.isNotEmpty(metadata.getEndTime()), Metadata::getCreateTime, metadata.getStartTime(), metadata.getEndTime());<br>queryWrapper.lambda().orderByDesc(Metadata::getCreateTime);<br><span class="hljs-keyword">return</span> queryWrapper;<br></code></pre></td></tr></table></figure>
+
+<p>搞定！</p>
+<h3 id="5-附：MySQL空间数据处理函数和方法"><a href="#5-附：MySQL空间数据处理函数和方法" class="headerlink" title="5. 附：MySQL空间数据处理函数和方法"></a>5. 附：MySQL空间数据处理函数和方法</h3><h4 id="空间查询函数"><a href="#空间查询函数" class="headerlink" title="空间查询函数"></a>空间查询函数</h4><ul>
+<li><p>包含相关<br>MBRContains(A,B) –&gt; A包含B<br>MBRWithin(A,B) –&gt; A在B中<br>注意:包含关系中，所要验证的集合必须全部包含在指定的集合中。如果只有部分在其中，应该使用相交</p>
+</li>
+<li><p>覆盖相关<br>MBRCoveredBy(A,B) –&gt; A被B覆盖<br>MBRCovers(A,B) –&gt; A覆盖B</p>
+</li>
+<li><p>相交相关<br>MBRDisjoint(A,B) –&gt; A、B不相交<br>MBRIntersects(A,B) –&gt; A、B相交</p>
+</li>
+<li><p>接触<br>MBRTouches(A,B) –&gt; A、B接触，接触的概念类似于相切</p>
+</li>
+<li><p>重叠<br>MBROverlaps(A,B) –&gt; A、B重叠</p>
+</li>
+<li><p>相同<br>MBREquals(A,B) –&gt; A、B相同</p>
+</li>
+</ul>
+<h4 id="空间数据相关方法"><a href="#空间数据相关方法" class="headerlink" title="空间数据相关方法"></a>空间数据相关方法</h4><ul>
+<li><p>点独有<br>开始、结束点<br>ST_StartPoint(A)<br>ST_EndPoint(A)</p>
+</li>
+<li><p>获取x或y<br>ST_X(A)<br>ST_Y(A)</p>
+</li>
+<li><p>凸包<br>ST_ConvexHull(A) –&gt; 多点A的凸包面</p>
+</li>
+<li><p>返回矩形<br>ST_MakeEnvelope(A,B) –&gt; A、B为对角点</p>
+</li>
+<li><p>线独有</p>
+<ul>
+<li>线是否闭合<br>ST_IsClosed(A)</li>
+<li>线中点数量<br>ST_NumPoints</li>
+<li>线中第n个点<br>ST_PointN(A,n)</li>
+<li>线长度<br>ST_Length(A)</li>
+<li>生成矩形<br>ST_Envelope(A) –&gt; A只有两个点，且不是水平或竖直线</li>
+</ul>
+</li>
+<li><p>面积<br>ST_Area(A)</p>
+<ul>
+<li>面的内外边界<br>ST_ExteriorRing(A) –&gt; 获取A面外环边界，返回值为LineString<br>ST_InteriorRingN(A,num) –&gt; 获取A面中第num个内环边界，返回值为LineString。num从1开始。<br>ST_NumInteriorRings(A) –&gt; 获取A面内环数量(5.7.8后添加ST_NumInteriorRing，效果一样)<br>部分geo对象可用</li>
+</ul>
+</li>
+<li><p>集合</p>
+<ul>
+<li>交集<br>ST_Intersection(A,B)</li>
+<li>异或<br>ST_SymDifference(A,B) –&gt; A、B中独有的</li>
+<li>并集<br>ST_Union(A,B)</li>
+<li>质心<br>ST_Centroid(A)</li>
+<li>距离<br>ST_Distance(A,B) –&gt; A和B距离<br>ST_Distance_Sphere(A,B) –&gt; A和B的球面距离</li>
+<li>不同<br>ST_Difference(A,B) –&gt; 返回A中有B中没有的</li>
+<li>抽稀<br>ST_Simplify(A,mix_distance) –&gt; 将A抽稀，简化A中两点距离小于max的值(用起来有点迷。。待研究)</li>
+</ul>
+</li>
+<li><p>缓冲区<br>ST_Buffer(A,length) –&gt; 通过A几何体，生成他周边范围为length距离的面</p>
+</li>
+</ul>
+<p>5.7.7后可以添加策略影响缓冲区的计算,设置的语句是ST_Buffer_Strategy()</p>
+<ul>
+<li><p>point策略<br>point_circle –&gt; 点的缓冲区是一个圆(默认)<br>point_square –&gt; 点的缓冲区是一个正方形，length是点到其中一边的距离</p>
+</li>
+<li><p>join策略<br>join_round –&gt; 连接处缓冲区边界为圆弧(默认)<br>join_miter –&gt; 连接处缓冲区边界为尖角</p>
+</li>
+<li><p>end策略<br>end_round –&gt; 在结束处缓冲区为圆弧(默认)<br>end_flat –&gt; 在结束处缓冲区为平坦的直线</p>
+</li>
+<li><p>举例生成缓冲区<br>ST_Buffer(point, 5, ST_Buffer_Strategy(‘point_square’))<br>ST_Buffer(line, 5, ST_Buffer_Strategy(‘join_miter’, 10), ST_Buffer_Strategy(‘end_flat’))</p>
+</li>
+<li><p>相交<br>ST_Intersects(A,B) –&gt; A和B是否相交<br>ST_Crosses(A,B) –&gt; A和B是否相交(相交部分不等于A或B)<br>ST_Disjoint(A,B) –&gt; A和B是否不相交</p>
+</li>
+<li><p>重叠<br>ST_Overlaps(A,B)</p>
+</li>
+<li><p>接触<br>ST_Touches(A,B)</p>
+</li>
+<li><p>包含<br>ST_Contains(A,B) –&gt; A是否包含B<br>ST_Within(A,B) –&gt; A是否在B中</p>
+</li>
+<li><p>验证数据是否合法<br>ST_IsValid(A)<br>ST_Validate(A)</p>
+</li>
+<li><p>geo对象返回格式<br>ST_AsText(字段名) –&gt; 以文本形式返回<br>ST_AsBinary(字段名) –&gt; 以二进制形式返回<br>包含、覆盖、重叠三个方法不清楚具体的区别</p>
+</li>
+</ul>
+<p><em>注意:每个方法前的MBR、ST可要可不要，在mysql5.7.6之后，不带MBR、ST的方法开始弃用</em></p>
 
                 
               </div>
