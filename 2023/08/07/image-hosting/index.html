@@ -16,26 +16,25 @@
   <meta name="author" content="巨鹿">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题目要求leetcode地址给定一个二叉树 根节点 root ，树的每个节点的值要么是 0，要么是 1。请剪除该二叉树中所有节点的值为 0 的子树。节点 node 的子树为 node 本身，以及所有 node 的后代。 示例1 输入: [1,null,0,0,1]输出: [1,null,0,null,1]解释:只有红色节点满足条件“所有不包含 1 的子树”。右图为返回的答案。  示例2 输入: [">
+    <meta name="description" content="前言：为什么使用图床？相较于冗长乏味的文字堆砌，读者往往更喜欢图文并茂、生动有趣的文章。因此好的图片往往能起到画龙点睛的作用。我们知道，在hexo中（在一半web项目中也适用），添加图片一般有两种形式：  存在项目public目录下 存在远程仓库  当我们有大量的图片时，如果存在本地目录下，不仅造成项目臃肿，而且加载速度也不快，所以，我们会考虑把图片存在远程服务器，也就是所说的图床。 方案选择方案">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指 Offer II 047. 二叉树剪枝">
-<meta property="og:url" content="https://liuxx1106.github.io/2023/07/31/algorithm-offer7/index.html">
+<meta property="og:title" content="Hexo博客搭建之图床的最佳实践">
+<meta property="og:url" content="https://liuxx1106.github.io/2023/08/07/image-hosting/index.html">
 <meta property="og:site_name" content="巨鹿Coding">
-<meta property="og:description" content="题目要求leetcode地址给定一个二叉树 根节点 root ，树的每个节点的值要么是 0，要么是 1。请剪除该二叉树中所有节点的值为 0 的子树。节点 node 的子树为 node 本身，以及所有 node 的后代。 示例1 输入: [1,null,0,0,1]输出: [1,null,0,null,1]解释:只有红色节点满足条件“所有不包含 1 的子树”。右图为返回的答案。  示例2 输入: [">
+<meta property="og:description" content="前言：为什么使用图床？相较于冗长乏味的文字堆砌，读者往往更喜欢图文并茂、生动有趣的文章。因此好的图片往往能起到画龙点睛的作用。我们知道，在hexo中（在一半web项目中也适用），添加图片一般有两种形式：  存在项目public目录下 存在远程仓库  当我们有大量的图片时，如果存在本地目录下，不仅造成项目臃肿，而且加载速度也不快，所以，我们会考虑把图片存在远程服务器，也就是所说的图床。 方案选择方案">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/algorithm7.jpg">
-<meta property="article:published_time" content="2023-07-31T15:25:57.101Z">
-<meta property="article:modified_time" content="2023-08-07T10:42:44.533Z">
+<meta property="og:image" content="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/image-hosting.png">
+<meta property="article:published_time" content="2023-08-07T10:16:20.846Z">
+<meta property="article:modified_time" content="2023-08-07T15:06:28.667Z">
 <meta property="article:author" content="巨鹿">
-<meta property="article:tag" content="LeetCode">
-<meta property="article:tag" content="二叉树">
-<meta property="article:tag" content="深度优先搜索">
+<meta property="article:tag" content="图床">
+<meta property="article:tag" content="博客搭建">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/algorithm7.jpg">
+<meta name="twitter:image" content="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/image-hosting.png">
   
   
   
-  <title>剑指 Offer II 047. 二叉树剪枝 - 巨鹿Coding</title>
+  <title>Hexo博客搭建之图床的最佳实践 - 巨鹿Coding</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -230,7 +229,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="剑指 Offer II 047. 二叉树剪枝"></span>
+            <span id="subtitle" data-typed-text="Hexo博客搭建之图床的最佳实践"></span>
           
         </div>
 
@@ -241,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-31 23:25" pubdate>
-          2023年7月31日 晚上
+        <time datetime="2023-08-07 18:16" pubdate>
+          2023年8月7日 晚上
         </time>
       </span>
     
@@ -253,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          1.2k 字
         
       </span>
     
@@ -264,7 +263,7 @@
         
         
         
-          13 分钟
+          11 分钟
         
       </span>
     
@@ -309,40 +308,65 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">剑指 Offer II 047. 二叉树剪枝</h1>
+            <h1 id="seo-header">Hexo博客搭建之图床的最佳实践</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pOCWxh/description/?envType=study-plan-v2&envId=coding-interviews-special">leetcode地址</a><br>给定一个二叉树 根节点 root ，树的每个节点的值要么是 0，要么是 1。请剪除该二叉树中所有节点的值为 0 的子树。<br>节点 node 的子树为 node 本身，以及所有 node 的后代。</p>
-<h4 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h4><blockquote>
-<p>输入: [1,null,0,0,1]<br>输出: [1,null,0,null,1]<br>解释:<br>只有红色节点满足条件“所有不包含 1 的子树”。<br>右图为返回的答案。<br><img src="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/offer7-1.png" srcset="/img/loading.gif" lazyload alt="示例1"></p>
-</blockquote>
-<h4 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h4><blockquote>
-<p>输入: [1,0,1,0,0,0,1]<br>输出: [1,null,1,null,1]<br>解释:<br><img src="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/offer7-2.png" srcset="/img/loading.gif" lazyload alt="示例2"></p>
-</blockquote>
-<h4 id="示例3"><a href="#示例3" class="headerlink" title="示例3"></a>示例3</h4><blockquote>
-<p>输入: [1,1,0,1,1,0,1,0]<br>输出: [1,1,0,1,1,null,1]<br>解释:<br><img src="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/offer7-3.png" srcset="/img/loading.gif" lazyload alt="示例3"></p>
-</blockquote>
-<h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><ul>
-<li>二叉树的节点个数的范围是 [1,200]</li>
-<li>二叉树节点的值只会是 0 或 1</li>
-</ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>根据题意和示例，我们可以比较清晰地找到剪枝的条件有两个：</p>
+                <h3 id="前言：为什么使用图床？"><a href="#前言：为什么使用图床？" class="headerlink" title="前言：为什么使用图床？"></a>前言：为什么使用图床？</h3><p>相较于冗长乏味的文字堆砌，读者往往更喜欢图文并茂、生动有趣的文章。因此好的图片往往能起到画龙点睛的作用。<br>我们知道，在hexo中（在一半web项目中也适用），添加图片一般有两种形式：</p>
 <ul>
-<li><ol>
-<li>node.val &#x3D;&#x3D; 0;</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>node.left &#x3D;&#x3D; null &amp;&amp; node.right &#x3D;&#x3D; null</li>
-</ol>
-</li>
+<li>存在项目public目录下</li>
+<li>存在远程仓库</li>
 </ul>
-<p>因此，我们可以利用深度优先搜索遍历节点的子节点，递归，即可得到最终答案。</p>
-<h2 id="代码实现（java）"><a href="#代码实现（java）" class="headerlink" title="代码实现（java）"></a>代码实现（java）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">pruneTree</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">return</span> dfs(root);<br>    &#125;<br><br>    TreeNode <span class="hljs-title function_">dfs</span><span class="hljs-params">(TreeNode node)</span> &#123;<br>        <span class="hljs-keyword">if</span>(node == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> node;<br>        &#125;<br>        node.left = dfs(node.left);<br>        node.right = dfs(node.right);<br>        <span class="hljs-keyword">if</span>(node.val == <span class="hljs-number">0</span> &amp;&amp; node.left == <span class="hljs-literal">null</span> &amp;&amp; node.right == <span class="hljs-literal">null</span>) &#123;<br>            node = <span class="hljs-literal">null</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> node;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="代码实现（golang）"><a href="#代码实现（golang）" class="headerlink" title="代码实现（golang）"></a>代码实现（golang）</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * type TreeNode struct &#123;</span><br><span class="hljs-comment"> *     Val int</span><br><span class="hljs-comment"> *     Left *TreeNode</span><br><span class="hljs-comment"> *     Right *TreeNode</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">pruneTree</span><span class="hljs-params">(root *TreeNode)</span></span> *TreeNode &#123;<br>    <span class="hljs-keyword">if</span> root == <span class="hljs-literal">nil</span> &#123;<br>        <span class="hljs-keyword">return</span> root<br>    &#125;<br>    root.Left = pruneTree(root.Left)<br>    root.Right = pruneTree(root.Right)<br>    <span class="hljs-keyword">if</span> root.Val == <span class="hljs-number">0</span> &amp;&amp; root.Left == <span class="hljs-literal">nil</span> &amp;&amp; root.Right == <span class="hljs-literal">nil</span> &#123;<br>        root = <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> root<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>当我们有大量的图片时，如果存在本地目录下，不仅造成项目臃肿，而且加载速度也不快，<br>所以，我们会考虑把图片存在远程服务器，也就是所说的图床。</p>
+<h3 id="方案选择"><a href="#方案选择" class="headerlink" title="方案选择"></a>方案选择</h3><h4 id="方案一：Github仓库-Picgo-jsDelivr-CDN"><a href="#方案一：Github仓库-Picgo-jsDelivr-CDN" class="headerlink" title="方案一：Github仓库 + Picgo + jsDelivr CDN"></a>方案一：Github仓库 + Picgo + jsDelivr CDN</h4><p>由于最近国内将jsDelivrCDN给墙了，无法通过其对Github进行加速，这种方案目前暂时不可行，此处</p>
+<p>介绍下具体操作即可：</p>
+<ol>
+<li><p>创建Github公共仓库，名字随便，注意一定要是公共的，否则别人无法访问到图片资源。</p>
+</li>
+<li><p>下载 Picgo</p>
+</li>
+</ol>
+<blockquote>
+<p>PicGo: 一个用于快速上传图片并获取图片 URL 链接的工具</p>
+</blockquote>
+<ol start="3">
+<li>将Github创建仓库信息配置到Picgo中。打开Picgo，点击图床设置，选择Github图床，填写如下信息。</li>
+</ol>
+<p><img src="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/image-hosting1.png" srcset="/img/loading.gif" lazyload alt="picgo配置github"></p>
+<p>仓库名写你之前创建好的仓库名</p>
+<p>分支填现有的分支即可</p>
+<p>其中的Token可以在Github - Settings - Personal access tokens 中生成，只选择repo选项就可以</p>
+<p>自定义域名这里填写：<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/%E7%94%A8%E6%88%B7%E5%90%8D/%E4%BB%93%E5%BA%93%E5%90%8D%EF%BC%8C%E5%9B%A0%E4%B8%BA%E6%88%91%E4%BB%AC%E9%87%87%E7%94%A8%E4%BA%86jsDelivr">https://cdn.jsdelivr.net/gh/用户名/仓库名，因为我们采用了jsDelivr</a> CDN进行加速（目前用不了）</p>
+<p>最后保存为默认图床即可</p>
+<h4 id="方案二：阿里云对象存储-Picgo"><a href="#方案二：阿里云对象存储-Picgo" class="headerlink" title="方案二：阿里云对象存储 + Picgo"></a>方案二：阿里云对象存储 + Picgo</h4><p>谈到云服务器首先想到的就是阿里云了，目前阿里云是国内最好的云上服务解决方案提供商。</p>
+<p>我们的项目中接触和应用和比较多，那么今天我们就先来实践下阿里云对象存储oss</p>
+<ol>
+<li>登录阿里云网站-&gt;进入工作台页面-&gt;搜索对象存储-&gt;点击立即开通-&gt;管理控制台-&gt;bucket列表</li>
+</ol>
+<p><img src="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/image-hosting2.png" srcset="/img/loading.gif" lazyload alt="picgo配置aliyunoss1"></p>
+<ol start="2">
+<li>进入页面，点击创建bucket.</li>
+</ol>
+<ul>
+<li>Bucket名称和地域必填。地域选择一个距离自己近一些的地方。</li>
+<li>读写权限选择为公共读，其余均默认</li>
+</ul>
+<p><img src="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/image-hosting3.png" srcset="/img/loading.gif" lazyload alt="picgo配置aliyunoss2"></p>
+<p>点击网页右上角的头像，再点击AccessKey管理，进入该页面<br>点击创建AccessKey，将创建号的key复制保存下来，之后在Picgo上需要用到</p>
+<p><img src="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/image-hosting4.png" srcset="/img/loading.gif" lazyload alt="picgo配置aliyunoss3"></p>
+<ol start="3">
+<li>打开Picgo，点击图床设置，选择阿里云OSS，填写如下信息。</li>
+</ol>
+<p><img src="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/image-hosting5.png" srcset="/img/loading.gif" lazyload alt="picgo配置aliyunoss4"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>结合个人喜好和使用经验，我还是更推荐方案三作为我们图床实践的最佳选择</p>
+<p>就算后期图片访问量变大，也仅需要充一点钱，大概一年40GB只需要9块钱，非常划算。</p>
+<h3 id="结合Typora使用"><a href="#结合Typora使用" class="headerlink" title="结合Typora使用"></a>结合Typora使用</h3><p>当我们成功搭建好图床之后，每次写Markdown文档时，都需要先截图，再保存，然后手动打开Picgo完成上传，最后将图片地址复制到Markdown文档中。</p>
+<p>如何做到更加高效地上传图片到图床呢？</p>
+<p>用Typora写笔记，只需要先截图，再粘贴到Markdown文档，即可直接跳过上传操作，Typora帮我们自动完成。</p>
+<p>操作：打开Typora的设置，点击图像，进行如下设置</p>
+<p><img src="https://murphy-blog.oss-cn-hangzhou.aliyuncs.com/image-hosting6.png" srcset="/img/loading.gif" lazyload alt="picgo配置aliyunoss5"></p>
+<p>自此，便可以方便快捷地用Hexo写图文并茂的博客啦~</p>
 
                 
               </div>
@@ -361,7 +385,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%89%91%E6%8C%87-Offer-II/" class="category-chain-item">剑指 Offer II</a>
+  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="category-chain-item">博客搭建</a>
   
   
 
@@ -376,11 +400,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/LeetCode/" class="print-no-link">#LeetCode</a>
+        <a href="/tags/%E5%9B%BE%E5%BA%8A/" class="print-no-link">#图床</a>
       
-        <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" class="print-no-link">#二叉树</a>
-      
-        <a href="/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" class="print-no-link">#深度优先搜索</a>
+        <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="print-no-link">#博客搭建</a>
       
     </div>
   
@@ -392,8 +414,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>剑指 Offer II 047. 二叉树剪枝</div>
-      <div>https://liuxx1106.github.io/2023/07/31/algorithm-offer7/</div>
+      <div>Hexo博客搭建之图床的最佳实践</div>
+      <div>https://liuxx1106.github.io/2023/08/07/image-hosting/</div>
     </div>
     <div class="license-meta">
       
@@ -405,7 +427,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月31日</div>
+          <div>2023年8月7日</div>
         </div>
       
       
@@ -437,18 +459,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/07/image-hosting/" title="Hexo博客搭建之图床的最佳实践">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hexo博客搭建之图床的最佳实践</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/26/mysql-geometry/" title="MySQL空间数据操作及MyBatisPlus接入">
-                        <span class="hidden-mobile">MySQL空间数据操作及MyBatisPlus接入</span>
+                      <a href="/2023/07/31/algorithm-offer7/" title="剑指 Offer II 047. 二叉树剪枝">
+                        <span class="hidden-mobile">剑指 Offer II 047. 二叉树剪枝</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
